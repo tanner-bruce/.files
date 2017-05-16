@@ -1,0 +1,92 @@
+[color]
+	ui = auto
+[color.diff-highlight]
+	oldnormal = "1 0"
+	oldhighlight = "210 52"
+	newnormal = "2 0"
+	newhighlight = "120 22"
+[core]
+	editor = vim
+[diff]
+	tool = kdiff3
+	compactionHeuristic = true
+	indentHeuristic = true
+[diff "image"]
+	command = simple-imagediff
+[multidiff]
+	tool = vimmultidiff -f
+[merge]
+	tool = kdiff3
+[branch]
+	autoSetupRebase = always
+[alias]
+	a  = add
+	au = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
+	b  = branch
+	br = branch -r
+	c  = commit
+	co = checkout
+	df = diff -U5 --color --minimal --ignore-space-change --ignore-blank-lines --no-ext-diff
+	eu = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
+	f  = fetch       --prune --verbose
+	fa = fetch --all --prune --verbose
+	ig = !git ls-files -v | grep "^[[:lower:]]"
+	l  = log       --graph        --abbrev-commit --date=relative --pretty=format:'%C(red)%h%C(reset) -%C(yellow)%d%C(reset) %s %C(green)%cr%C(reset) %C(blue)%an%C(reset)'
+	la = log --all --graph --tags --abbrev-commit --date=relative --pretty=format:'%C(red)%h%C(reset) -%C(yellow)%d%C(reset) %s %C(green)%cr%C(reset) %C(blue)%an%C(reset)'
+	mf = multidiff
+	ro = !sh -c 'git rebase -i --autostash --autosquash origin/"$( git symbolic-ref --short HEAD )"'
+	s  = status -sb
+	sf = !sh -c 'git show --pretty="format:" --name-only "$@" | grep -v "^$" | sort -u' -
+	su = submodule update --init --recursive
+
+	try = !sh -c 'git clone --depth "${2-1}" --branch "${1-master}" --single-branch "$0"'
+
+	freeze = !bash -c '. $HOME/bin/git-freeze.sh && git-freeze'
+	thaw = !bash -c '. $HOME/bin/git-freeze.sh && git-thaw'
+
+#[pager]
+#	diff = colordiff | less -iRS
+#	show = colordiff | less -iRS
+
+[push]
+	default = upstream # ${pushDefault}
+	recurseSubmodules = check
+
+# See http://git-scm.com/blog/2010/03/08/rerere.html
+[rerere]
+	enabled = true
+
+# See http://git-scm.com/docs/git-rebase#_configuration
+[rebase]
+	autoSquash = true
+	autoStash = true
+
+[stash]
+	showPatch = true
+
+# See https://groups.google.com/forum/m/#!msg/binary-transparency/f-BI4o8HZW0/MDmnWideAgAJ
+[transfer]
+	fsckobjects = true
+[fetch]
+	fsckobjects = true
+[receive]
+	fsckObjects = true
+
+[cola]
+	# format: font family, pointSizeF, pixelSize, QFont::StyleHint, QFont::Weight, QFont::Style, underline, strikeOut, fixedPitch, rawMode
+	fontdiff = Fira Code,11,-1,5,50,0,0,0,0,0
+	tabwidth = 4
+	boldheaders = true
+	spellcheck = true
+
+# See https://github.com/git-cola/git-cola/blob/b6715fea/share/doc/git-cola/git-cola.rst#configuration-variables
+[cola.color]
+	text = 000000
+	add = cdffe0
+	remove = ffd0d0
+	header = bbbbbb
+[credential]
+helper = cache --timeout=3600
+[user]
+	name = Tanner Bruce
+	email = tanner.bruce@farmersedge.ca
