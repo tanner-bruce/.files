@@ -341,3 +341,5 @@ autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 nnoremap <leader>w :w<CR>
 
 set pastetoggle=<leader>p
+
+nnoremap <leader>rb :%s/["']\([a-zA-Z_\-]\+\)['"] \?=>/\1:/g
