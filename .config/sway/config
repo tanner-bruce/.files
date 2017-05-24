@@ -18,6 +18,7 @@ set $term urxvt
 # Your preferred application launcher
 set $menu j4-dmenu-desktop
 
+
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/sway/)
@@ -52,10 +53,10 @@ output DVI-I-1 resolution 1920x1080 position 0,1080
     bindsym $mod+Return exec $term
 
     # kill focused window
-    bindsym $mod+Shift+q kill
+    bindsym $mod+Shift+c kill
 
     # start your launcher
-    bindsym $mod+d exec $menu
+    bindsym $mod+p exec $menu
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -65,7 +66,7 @@ output DVI-I-1 resolution 1920x1080 position 0,1080
     floating_modifier $mod normal
 
     # reload the configuration file
-    bindsym $mod+Shift+c reload
+    bindsym $mod+Shift+r reload
 
     # exit sway (logs you out of your wayland session)
     bindsym $mod+Shift+e exit
