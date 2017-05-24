@@ -1,4 +1,4 @@
-font pango: Fira Code Bold 10
+font pango: Fira Code Bold 12
 
 #<class>                   <border>        <background>   <text>       <indicator>
 client.focused             #2A2A2A         #1d1f21        #d2cccc      #1d1f21
@@ -106,7 +106,7 @@ mode "resize"
 bindsym $mod+Shift+q kill
 
 # key binding to start program launcher
-bindsym $mod+d exec dmenu_run -l 70 -fn 'Fira Code:size=9:style=Bold' -nb '#1d1f21' -nf '#818181' -sb '#1d1f21' -sf '#ffffff'
+bindsym $mod+d exec j4-dmenu-desktop -fn 'Fira Code:size=9:style=Bold' -nb '#1d1f21' -nf '#818181' -sb '#1d1f21' -sf '#ffffff'
 
 # key binding to enter "resize" mode
 bindsym $mod+r mode "resize"

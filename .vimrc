@@ -12,8 +12,11 @@ set shell=/bin/bash
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+Plugin 'ElmCast/elm-vim'
+Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'Marfisc/vorange'
 Plugin 'Shougo/neocomplete.vim'
+Plugin 'SirVer/ultisnips'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
@@ -21,6 +24,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'elzr/vim-json'
 Plugin 'fatih/vim-go'
+Plugin 'garbas/vim-snipmate'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'gregsexton/gitv'
 Plugin 'kchmck/vim-coffee-script'
@@ -28,21 +32,18 @@ Plugin 'majutsushi/tagbar'
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
 Plugin 'nvie/vim-flake8'
 Plugin 'rking/ag.vim'
-Plugin 'garbas/vim-snipmate'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-Plugin 'SirVer/ultisnips'
 Plugin 'tmhedberg/SimpylFold'
+Plugin 'tomtom/tlib_vim'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-obsession'
 Plugin 'tpope/vim-surround'
 Plugin 'vadv/vim-chef'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-ruby/vim-ruby'
@@ -76,8 +77,7 @@ set showmode
 set relativenumber
 set number
 
-set list
-set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
+"set list
 set incsearch
 set hlsearch
 
