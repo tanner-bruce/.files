@@ -21,28 +21,34 @@ set CCACHE_DIR $HOME/.ccache
 function kube
     abbr k kubectl
     abbr kcc 'kubectl config use-context'
-    abbr kd 'kubectl delete'
-    function ke 
-        kubectl exec -it -n $ARGV[1] (kubectl get po -n $ARGV[1] | grep $ARGV[2] | cut -f1 -d' ')
+    abbr kc 'kubectl create -f' 
+    abbr kd 'kubectl delete -f'
+    abbr kns kubectl get ns
+    
+    function ka
+        kubectl get po --all-namespaces | grep $argv[1]
     end
-    abbr kl 'kubectl exec -it -n'
-    abbr kc 'kubectl create'
+
+    function ke 
+        kubectl exec -it -n $argv[1] (kubectl get po -n $argv[1] | grep $argv[2] | cut -f1 -d' ') /bin/bash
+    end
+
+    function krc
+        kubectl delete -f $argv[1]; and kubectl create -f $argv[1]
+    end
 end
 
 function chef
-    abbr kv 'kitchen converge'
-    abbr kls 'kitchen list'
     abbr cb 'cd /home/tanner/chef-repo/cookbooks'
+    abbr bi 'berks install &; bundle install'
     abbr be 'bundle exec'
-    abbr bi 'bundle exec berks install'
-    abbr bu 'bundle exec berks upload'
     abbr bk 'bundle exec kitchen'
+    abbr bu 'berks upload'
     abbr kc 'bundle exec kitchen converge'
     abbr kd 'bundle exec kitchen destroy'
-    abbr kl 'bundle exec kitchen list'
-    abbr kv 'bundle exec kitchen verify'
-    abbr bi 'bundle install'
+    abbr kls 'bundle exec kitchen list'
     abbr kli 'bundle exec kitchen login'
+    abbr kv 'bundle exec kitchen verify'
 end
 
 xrdb -merge ~/.Xresources
