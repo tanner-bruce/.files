@@ -4,6 +4,8 @@ set -gx PATH $GOPATH/bin $PATH
 set -gx EDITOR vim
 set -gx VISUAL vim
 set -gx _JAVA_AWT_WM_NONREPARENTING 1
+set -gx CCACHE_DIR $HOME/.ccache
+set -gx theme_nerd_fonts yes
 
 
 function sser --description "Starts a SimpleHTTPServer in the current directory"
@@ -16,7 +18,6 @@ function sser --description "Starts a SimpleHTTPServer in the current directory"
 end
 
 
-set CCACHE_DIR $HOME/.ccache
 
 function kube
     abbr k kubectl
@@ -39,7 +40,7 @@ function kube
 end
 
 function chef
-    abbr cb 'cd /home/tanner/chef-repo/cookbooks'
+    abbr cb 'cd /home/tanner/work/chef'
     abbr bi 'berks install &; bundle install'
     abbr be 'bundle exec'
     abbr bk 'bundle exec kitchen'
@@ -50,5 +51,3 @@ function chef
     abbr kli 'bundle exec kitchen login'
     abbr kv 'bundle exec kitchen verify'
 end
-
-xrdb -merge ~/.Xresources
