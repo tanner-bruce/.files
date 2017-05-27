@@ -42,6 +42,13 @@ function kube
         kubectl delete -f $argv[1]; and kubectl create -f $argv[1]
     end
 
+    function kpo
+        if [ (count $argv) = 2 ]
+            kubectl get po -n $argv[1] | grep $argv[2]
+        else
+            kubectl get po -n $argv[1]
+        end
+    end
 end
 
 function chef
