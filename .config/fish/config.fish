@@ -34,9 +34,14 @@ function kube
         kubectl exec -it -n $argv[1] (kubectl get po -n $argv[1] | grep $argv[2] | cut -f1 -d' ') /bin/bash
     end
 
+    function kl
+        kubectl logs -n $argv[1] (kubectl get po -n $argv[1] | grep $argv[2] | cut -f1 -d' ')
+    end
+
     function krc
         kubectl delete -f $argv[1]; and kubectl create -f $argv[1]
     end
+
 end
 
 function chef
