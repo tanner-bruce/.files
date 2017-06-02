@@ -1,6 +1,6 @@
 set PATH ~/.gem/ruby/2.4.0/bin $PATH
 set PATH ~/bin $PATH
-set -gx PATH $GOPATH/bin $PATH
+set -gx PATH  $PATH $GOPATH/bin
 set -gx EDITOR vim
 set -gx VISUAL vim
 set -gx _JAVA_AWT_WM_NONREPARENTING 1
@@ -18,14 +18,13 @@ function sser --description "Starts a SimpleHTTPServer in the current directory"
 end
 
 
-
 function kube
     abbr k kubectl
-    abbr kcc 'kubectl config use-context'
-    abbr kc 'kubectl create -f' 
-    abbr kd 'kubectl delete -f'
+    abbr kcc kubectl config use-context
+    abbr kc kubectl create -f 
+    abbr kd kubectl delete -f
     abbr kns kubectl get ns
-    
+
     function ka
         kubectl get po --all-namespaces | grep $argv[1]
     end
@@ -52,14 +51,14 @@ function kube
 end
 
 function chef
-    abbr cb 'cd /home/tanner/work/chef'
-    abbr bi 'berks install &; bundle install'
-    abbr be 'bundle exec'
-    abbr bk 'bundle exec kitchen'
-    abbr bu 'berks upload'
-    abbr kc 'bundle exec kitchen converge'
-    abbr kd 'bundle exec kitchen destroy'
-    abbr kls 'bundle exec kitchen list'
-    abbr kli 'bundle exec kitchen login'
-    abbr kv 'bundle exec kitchen verify'
+    abbr cb cd /home/tanner/work/chef
+    abbr bi berks install &; bundle install
+    abbr be bundle exec
+    abbr bk bundle exec kitchen
+    abbr bu berks upload
+    abbr kc bundle exec kitchen converge
+    abbr kd bundle exec kitchen destroy
+    abbr kls bundle exec kitchen list
+    abbr kli bundle exec kitchen login
+    abbr kv bundle exec kitchen verify
 end
