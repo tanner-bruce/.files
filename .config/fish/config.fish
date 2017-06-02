@@ -18,6 +18,11 @@ function sser --description "Starts a SimpleHTTPServer in the current directory"
 end
 
 
+abbr Grep grep
+abbr pacman pacaur
+abbr pac pacaur
+abbr pss pacaur -Ss
+abbr psi pacaur -S
 
 function kube
     abbr k kubectl
