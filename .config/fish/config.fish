@@ -59,8 +59,8 @@ function kube
 end
 
 function chef
-    abbr cb cd /home/tanner/work/chef
-    abbr bi berks install &; bundle install
+    abbr cb cd $HOME/work/chef
+    abbr bi 'berks install &; bundle install'
     abbr be bundle exec
     abbr bk bundle exec kitchen
     abbr bu berks upload
