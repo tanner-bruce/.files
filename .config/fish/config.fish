@@ -1,3 +1,5 @@
+set -gx GOPATH ~/go/
+
 set PATH ~/.gem/ruby/2.4.0/bin $PATH
 set PATH ~/bin $PATH
 set -gx PATH  $PATH $GOPATH/bin
@@ -6,7 +8,6 @@ set -gx VISUAL vim
 set -gx _JAVA_AWT_WM_NONREPARENTING 1
 set -gx CCACHE_DIR $HOME/.ccache
 set -gx theme_nerd_fonts yes
-
 
 function sser --description "Starts a SimpleHTTPServer in the current directory"
   if [ (count $argv) = 0 ]
@@ -30,6 +31,7 @@ function kube
     abbr kc kubectl create -f 
     abbr kd kubectl delete -f
     abbr kns kubectl get ns
+    abbr kapo kubectl get po --all-namespaces
 
     function ka
         kubectl get po --all-namespaces | grep $argv[1]
