@@ -18,11 +18,24 @@ function sser --description "Starts a SimpleHTTPServer in the current directory"
 end
 
 
-abbr Grep grep
+# Arch specific
 abbr pacman pacaur
 abbr pac pacaur
 abbr pss pacaur -Ss
 abbr psi pacaur -S
+
+# tmux
+abbr ta tmux -u attach -t
+abbr tc tmux -u create -s
+abbr tn tmux -u new -s
+
+# git
+abbr gcm git checkout master
+abbr gch git checkout
+abbr gp git pull
+
+# misc
+abbr Grep grep
 
 function kube
     abbr k kubectl
@@ -33,6 +46,10 @@ function kube
 
     function ka
         kubectl get po --all-namespaces | grep $argv[1]
+    end
+
+    function kdp
+        kubectl delete po -n $argv[1] (kubectl get po -n $argv[1] | grep $argv[2] | cut -f1 -d' ')
     end
 
     function ke 
@@ -58,13 +75,13 @@ end
 
 function chef
     abbr cb cd /home/tanner/work/chef
-    abbr bi berks install &; bundle install
+    abbr bi 'berks install &; bundle install'
     abbr be bundle exec
     abbr bk bundle exec kitchen
     abbr bu berks upload
-    abbr kc bundle exec kitchen converge
-    abbr kd bundle exec kitchen destroy
-    abbr kls bundle exec kitchen list
-    abbr kli bundle exec kitchen login
-    abbr kv bundle exec kitchen verify
+    abbr kc kitchen converge
+    abbr kd kitchen destroy
+    abbr kls kitchen list
+    abbr kli kitchen login
+    abbr kv kitchen verify
 end
