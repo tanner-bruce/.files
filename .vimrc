@@ -49,6 +49,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'vimwiki/vimwiki'
+Plugin 'wilriker/vim-fish'
 call vundle#end()
 
 autocmd FileType ruby,eruby if expand('%:p') =~? 'chef' | set filetype=ruby.eruby.chef | endif

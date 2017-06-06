@@ -46,27 +46,31 @@ function kube
     abbr kns kubectl get ns
     abbr kapo kubectl get po --all-namespaces
 
-    function ka
+    function kps
+        kubectl get po -n $argv[1] | grep $argv[2] | cut -f1 -d' '
+    end
+
+    function kaps
         kubectl get po --all-namespaces | grep $argv[1]
     end
 
     function kdp
-        kubectl delete po -n $argv[1] (kubectl get po -n $argv[1] | grep $argv[2] | cut -f1 -d' ')
+        kubectl delete po -n $argv[1] (kps $argv[1] $argv[2])
     end
 
     function ke 
-        kubectl exec -it -n $argv[1] (kubectl get po -n $argv[1] | grep $argv[2] | cut -f1 -d' ') /bin/bash
+        kubectl exec -it -n $argv[1] (kps $argv[1] $argv[2]) /bin/bash
     end
 
     function kl
-        kubectl logs -n $argv[1] (kubectl get po -n $argv[1] | grep $argv[2] | cut -f1 -d' ')
+        kubectl logs -n $argv[1] (kps $argv[1] $argv[2])
     end
 
     function krc
         kubectl delete -f $argv[1]; and kubectl create -f $argv[1]
     end
 
-    function kpo
+    function kpl
         if [ (count $argv) = 2 ]
             kubectl get po -n $argv[1] | grep $argv[2]
         else
