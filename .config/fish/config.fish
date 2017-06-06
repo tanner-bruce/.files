@@ -91,3 +91,5 @@ function chef
     abbr kli kitchen login
     abbr kv kitchen verify
 end
+
+eval (ssh-agent -c)
