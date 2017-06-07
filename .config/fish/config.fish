@@ -70,7 +70,7 @@ function kube
         kubectl delete -f $argv[1]; and kubectl create -f $argv[1]
     end
 
-    function kpl
+    function kpo
         if [ (count $argv) = 2 ]
             kubectl get po -n $argv[1] | grep $argv[2]
         else
@@ -90,4 +90,8 @@ function chef
     abbr kls kitchen list
     abbr kli kitchen login
     abbr kv kitchen verify
+end
+
+function selcol
+    cat /dev/stdin | sed 's/[ ]\+/ /g'  | cut -f$argv[1] -d' '
 end
