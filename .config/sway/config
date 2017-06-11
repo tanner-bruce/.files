@@ -18,6 +18,14 @@ set $term urxvt
 # Your preferred application launcher
 set $menu j4-dmenu-desktop
 
+gaps inner 8
+gaps outer 8
+
+gaps inner all set 10
+gaps outer current plus 8
+
+smart_gaps on
+
 
 ### Output configuration
 #
@@ -70,6 +78,7 @@ output DVI-I-1 resolution 1920x1080 position 0,1080
 
     # exit sway (logs you out of your wayland session)
     bindsym $mod+Shift+e exit
+
 #
 # Moving around:
 #
@@ -89,11 +98,6 @@ output DVI-I-1 resolution 1920x1080 position 0,1080
     bindsym $mod+Shift+$down move down
     bindsym $mod+Shift+$up move up
     bindsym $mod+Shift+$right move right
-    # ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
 #
 # Workspaces:
 #
@@ -104,13 +108,13 @@ output DVI-I-1 resolution 1920x1080 position 0,1080
     bindsym $mod+4 workspace 4
     bindsym $mod+5 workspace 5
     bindsym $mod+6 workspace 6
-    bindsym $mod+7 workspace 7
     bindsym $mod+8 workspace 8
     bindsym $mod+9 workspace 9
     bindsym $mod+0 workspace 10
     # move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace 1
     bindsym $mod+Shift+2 move container to workspace 2
+
     bindsym $mod+Shift+3 move container to workspace 3
     bindsym $mod+Shift+4 move container to workspace 4
     bindsym $mod+Shift+5 move container to workspace 5
@@ -119,6 +123,12 @@ output DVI-I-1 resolution 1920x1080 position 0,1080
     bindsym $mod+Shift+8 move container to workspace 8
     bindsym $mod+Shift+9 move container to workspace 9
     bindsym $mod+Shift+0 move container to workspace 10
+
+    bindsym $mod+Shift+Left workspace prev
+    bindsym $mod+Shift+Right workspace next
+
+    bindsym $mod+Shift+Up move up
+
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 #
@@ -189,6 +199,7 @@ bindsym $mod+r mode "resize"
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
+    status_command i3blocks
     colors {
         statusline #ffffff
         background #323232

@@ -1,3 +1,4 @@
+URxvt*termName: rxvt-unicode-256color
 URxvt.urgentOnBell: off
 URxvt.visualBell: off
 URxvt.iso14755: off
@@ -20,11 +21,11 @@ URxvt.fading: 0
 URxvt.background: rgba:0000/0000/0000/fafa
 URxvt.foreground: 15
 
-URxvt.font: xft:Fura Mono Regular for Powerline Nerd Font Complete:regular:pixelsize=16:antialias=true:hinting=true,xft:Source Code Pro:regular:pixelsize=16:antialias=true:hinting=true,xft:DejaVu Sans Mono:pixelsize=18:antialias=true:hinting=true
-URxvt.boldFont: xft:Fura Mono Regular for Powerline Nerd Font Complete:bold:pixelsize=16:antialias=true:hinting=true,xft:Source Code Pro:bold:pixelsize=16:antialias=true:hinting=true,xft:DejaVu Sans Mono:bold:pixelsize=18:antialias=true:hinting=true
-URxvt.italicFont: xft:Fura Mono Regular for Powerline Nerd Font Complete:italic:pixelsize=16:antialias=true:hinting=true,xft:Source Code Pro:italic:pixelsize=16:antialias=true:hinting=true,xft:DejaVu Sans Mono:italic:pixelsize=18:antialias=true:hinting=true
-URxvt.boldItalicFont: xft:Fura Mono Regular for Powerline Nerd Font Complete:bold:italic:pixelsize=16:antialias=true:hinting=true,xft:Source Code Pro:bold:italic:pixelsize=16:antialias=true:hinting=true,xft:DejaVu Sans Mono:bold:italic:pixelsize=18:antialias=true:hinting=true
-URxvt.letterSpace: -2
+URxvt.font: xft:Iosevka Nerd Font:regular:pixelsize=16:antialias=true:hinting=true
+URxvt.boldFont: xft:Iosevka Nerd Font:bold:pixelsize=16:antialias=true:hinting=true
+URxvt.italicFont: xft:Iosevka Nerd Font:italic:pixelsize=16:antialias=true:hinting=true
+URxvt.boldItalicFont: xft:Iosevka Nerd Font:bold:italic:pixelsize=16:antialias=true:hinting=true
+URxvt.letterSpace: true
 
 ! Disable screen printing by overriding the default print pipe.
 URxvt.print-pipe: "cat >/dev/null"
@@ -45,7 +46,7 @@ URxvt.keysym.Control-Page_Up:   \033[5;5~
 URxvt.keysym.Control-Page_Down: \033[6;5~
 
 URxvt.perl-lib: ${HOME}/.urxvt/ext/perls
-URxvt.perl-ext-common: clipboard,default,matcher,-option-popup,-searchable-scrollback,-selection-popup
+URxvt.perl-ext-common: url-select,clipboard,default,matcher,-option-popup,-searchable-scrollback,-selection-popup
 
 URxvt.url-select.button:   1
 URxvt.url-select.launcher: x-www-browser

@@ -5,10 +5,15 @@ set PATH ~/bin $PATH
 set -gx PATH  $PATH $GOPATH/bin
 set -gx EDITOR vim
 set -gx VISUAL vim
-set -gx _JAVA_AWT_WM_NONREPARENTING 1
 set -gx CCACHE_DIR $HOME/.ccache
 set -gx theme_nerd_fonts yes
 
+
+# Java don't like tiling
+set -gx _JAVA_AWT_WM_NONREPARENTING 1
+wmname LG3D
+
+# can be handy
 function sser --description "Starts a SimpleHTTPServer in the current directory"
   if [ (count $argv) = 0 ]
     sser 8080
@@ -29,13 +34,19 @@ abbr psi pacaur -S
 abbr ta tmux -u attach -t
 abbr tc tmux -u create -s
 abbr tn tmux -u new -s
+abbr tl tmux list-sessions
 
 # git
 abbr gcm git checkout master
 abbr gch git checkout
 abbr gp git pull
+abbr gs git status
+abbr gr git reset
+abbr grh git reset hard
 
 # misc
+abbr e vim
+abbr ll ls -al
 abbr Grep grep
 
 function kube
@@ -47,7 +58,7 @@ function kube
     abbr kapo kubectl get po --all-namespaces
 
     function kps
-        kubectl get po -n $argv[1] | grep $argv[2] | cut -f1 -d' '
+        kubectl get po -n $argv[1] | grep $argv[2] | cut -f1 -d' ' | head -n1
     end
 
     function kaps
@@ -77,6 +88,10 @@ function kube
             kubectl get po -n $argv[1]
         end
     end
+
+    function kpf
+        kubectl port-forward -n $argv[1] (kps $argv[1] $argv[2]) $argv[3]
+    end
 end
 
 function chef
@@ -95,3 +110,6 @@ end
 function selcol
     cat /dev/stdin | sed 's/[ ]\+/ /g'  | cut -f$argv[1] -d' '
 end
+
+kube
+chef
