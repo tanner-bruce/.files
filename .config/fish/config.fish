@@ -111,5 +111,13 @@ function selcol
     cat /dev/stdin | sed 's/[ ]\+/ /g'  | cut -f$argv[1] -d' '
 end
 
+function json2yaml
+    ruby -rjson -ryaml -e "puts JSON.parse(File.read '/dev/stdin').to_yaml"
+end
+
+function yaml2json
+    ruby -rjson -ryaml -e "puts YAML.load_file('/dev/stdin').to_json"
+end
+
 kube
 chef
