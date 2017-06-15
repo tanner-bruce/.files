@@ -92,6 +92,13 @@ function kube
     function kpf
         kubectl port-forward -n $argv[1] (kps $argv[1] $argv[2]) $argv[3]
     end
+
+    function kpon
+        set file (mktemp)
+        kubectl get nodes -l $argv[1] | tail -n+2 | selcol 1 > $file
+        kubectl get po -o wide --all-namespaces | grep -f $file
+        rm $file
+    end
 end
 
 function chef
@@ -119,5 +126,5 @@ function yaml2json
     ruby -rjson -ryaml -e "puts YAML.load_file('/dev/stdin').to_json"
 end
 
-kube
 chef
+kube
