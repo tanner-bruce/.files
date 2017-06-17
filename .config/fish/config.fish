@@ -53,12 +53,21 @@ function kube
     abbr k kubectl
     abbr kcc kubectl config use-context
     abbr kc kubectl create -f 
-    abbr kd kubectl delete -f
+    abbr kd kd
+    abbr kr kubectl delete -f
     abbr kns kubectl get ns
     abbr kapo kubectl get po --all-namespaces
 
     function kps
         kubectl get po -n $argv[1] | grep $argv[2] | cut -f1 -d' ' | head -n1
+    end
+
+    function ked
+        kubectl edit $argv[1] (kps $argv[2] $argv[3]) -n $argv[2]
+    end
+
+    function kd
+        kubectl describe $argv[1] -n $argv[2]
     end
 
     function kaps
@@ -96,8 +105,17 @@ function kube
     function kpon
         set file (mktemp)
         kubectl get nodes -l $argv[1] | tail -n+2 | selcol 1 > $file
+        cat $file
         kubectl get po -o wide --all-namespaces | grep -f $file
         rm $file
+    end
+
+    function kg
+        kubectl get $argv[1] -n $argv[2]
+    end
+
+    function kga
+        kubectl get $argv[1] --all-namespaces
     end
 end
 
