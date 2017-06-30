@@ -53,21 +53,25 @@ function kube
     abbr k kubectl
     abbr kcc kubectl config use-context
     abbr kc kubectl create -f 
+    # chef uses kd as well
     abbr kd kd
     abbr kr kubectl delete -f
-    abbr kns kubectl get ns
     abbr kapo kubectl get po --all-namespaces
 
     function kps
-        kubectl get po -n $argv[1] | grep $argv[2] | cut -f1 -d' ' | head -n1
+        kubectl get po -n (kns $argv[1]) | grep $argv[2] | cut -f1 -d' ' | head -n1
+    end
+
+    function kns
+        kubectl get ns | grep $argv[1] | cut -f1 -d' ' | head -n1
     end
 
     function ked
-        kubectl edit $argv[1] (kps $argv[2] $argv[3]) -n $argv[2]
+        kubectl edit $argv[1] (kps $argv[2] $argv[3]) -n (kns $argv[2])
     end
 
     function kd
-        kubectl describe $argv[1] -n $argv[2]
+        kubectl describe $argv[1] -n (kns $argv[2])
     end
 
     function kaps
@@ -75,15 +79,15 @@ function kube
     end
 
     function kdp
-        kubectl delete po -n $argv[1] (kps $argv[1] $argv[2])
+        kubectl delete po -n (kns $argv[1]) (kps $argv[1] $argv[2])
     end
 
     function ke 
-        kubectl exec -it -n $argv[1] (kps $argv[1] $argv[2]) /bin/bash
+        kubectl exec -it -n (kns $argv[1]) (kps $argv[1] $argv[2]) /bin/bash
     end
 
     function kl
-        kubectl logs -n $argv[1] (kps $argv[1] $argv[2])
+        kubectl logs -n (kns $argv[1]) (kps $argv[1] $argv[2])
     end
 
     function krc
@@ -92,14 +96,14 @@ function kube
 
     function kpo
         if [ (count $argv) = 2 ]
-            kubectl get po -n $argv[1] | grep $argv[2]
+            kubectl get po -n (kns $argv[1]) | grep $argv[2]
         else
-            kubectl get po -n $argv[1]
+            kubectl get po -n (kns $argv[1])
         end
     end
 
     function kpf
-        kubectl port-forward -n $argv[1] (kps $argv[1] $argv[2]) $argv[3]
+        kubectl port-forward -n (kns $argv[1]) (kps $argv[1] $argv[2]) $argv[3]
     end
 
     function kpon
@@ -111,7 +115,7 @@ function kube
     end
 
     function kg
-        kubectl get $argv[1] -n $argv[2]
+        kubectl get $argv[1] -n (kns $argv[2])
     end
 
     function kga
@@ -142,6 +146,10 @@ end
 
 function yaml2json
     ruby -rjson -ryaml -e "puts YAML.load_file('/dev/stdin').to_json"
+end
+
+function fmtbytes
+    numfmt --to=iec-i --suffix=B --format="%.5f"
 end
 
 chef
