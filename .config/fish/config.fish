@@ -86,6 +86,10 @@ function kube
         kubectl logs -n $argv[1] (kps $argv[1] $argv[2])
     end
 
+    function klp
+        kubectl logs -n $argv[1] --previous (kps $argv[1] $argv[2])
+    end
+
     function krc
         kubectl delete -f $argv[1]; and kubectl create -f $argv[1]
     end
