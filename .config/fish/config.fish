@@ -71,6 +71,10 @@ function kube
     end
 
     function kd
+        kubectl delete $argv[1] -n (kns $argv[2]) (kg $argv[1] $argv[2] | grep $argv[3] | selcol 1)
+    end
+
+    function kds
         kubectl describe $argv[1] -n (kns $argv[2])
     end
 
