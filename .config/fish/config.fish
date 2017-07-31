@@ -160,5 +160,13 @@ function fmtbytes
     numfmt --to=iec-i --suffix=B --format="%.5f"
 end
 
+function ec2-id-from-private-dns
+    aws ec2 describe-instances --filters "Name=private-dns-name,Values=$argv[1]" | jq -r ".Reservations[].Instances[].InstanceId"
+end
+
+function terminate-ec2-id
+    aws ec2 terminate-instances --instance-ids $argv[1]
+end
+
 chef
 kube
