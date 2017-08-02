@@ -168,5 +168,9 @@ function terminate-ec2-id
     aws ec2 terminate-instances --instance-ids $argv[1]
 end
 
+function terminate-instance-from-private-dns
+    terminate-ec2-id (ec2-id-from-private-dns $argv[1])
+end
+
 chef
 kube
