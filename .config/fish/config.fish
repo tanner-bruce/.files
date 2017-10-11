@@ -1,7 +1,9 @@
 set -gx GOPATH ~/go/
+set -gx GOROOT ~/golang/
 
 set PATH ~/.gem/ruby/2.4.0/bin $PATH
 set PATH ~/bin $PATH
+set PATH ~/golang/bin $PATH
 set -gx PATH  $PATH $GOPATH/bin
 set -gx EDITOR vim
 set -gx VISUAL vim

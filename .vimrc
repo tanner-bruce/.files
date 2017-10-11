@@ -50,6 +50,7 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'vimwiki/vimwiki'
 Plugin 'wilriker/vim-fish'
+Plugin 'euclio/vim-markdown-composer'
 call vundle#end()
 
 autocmd FileType ruby,eruby if expand('%:p') =~? 'chef' | set filetype=ruby.eruby.chef | endif
