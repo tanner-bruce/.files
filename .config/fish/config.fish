@@ -1,12 +1,11 @@
 set -gx GOPATH ~/go/
-set -gx GOROOT ~/golang/
+set -gx GOROOT /go/
 
 set PATH ~/.gem/ruby/2.4.0/bin $PATH
 set PATH ~/bin $PATH
-set PATH ~/golang/bin $PATH
-set -gx PATH  $PATH $GOPATH/bin
-set -gx EDITOR vim
-set -gx VISUAL vim
+set -gx PATH $PATH $GOPATH/bin
+set -gx EDITOR nvim
+set -gx VISUAL nvim
 set -gx CCACHE_DIR $HOME/.ccache
 set -gx theme_nerd_fonts yes
 
@@ -26,8 +25,9 @@ function sser --description "Starts a SimpleHTTPServer in the current directory"
 end
 
 
+abbr run_hal docker run --name halyard --rm -v ~/.hal:/root/.hal gcr.io/spinnaker-marketplace/halyard:stable
+
 # Arch specific
-abbr pacman pacaur
 abbr pac pacaur
 abbr pss pacaur -Ss
 abbr psi pacaur -S
@@ -39,22 +39,36 @@ abbr tn tmux -u new -s
 abbr tl tmux list-sessions
 
 # git
+abbr gc git clone
 abbr gcm git checkout master
 abbr gch git checkout
+abbr gchf git checkout -- 
 abbr gp git pull
 abbr gs git status
 abbr gr git reset
+abbr gs git rm --staged
+abbr gst git status
+abbr gbv git branch -v
 abbr grh git reset hard
+abbr gd git diff
+abbr gds git diff --staged
+abbr gg git log --oneline --abbrev-commit --graph --decorate --color
 
 # misc
-abbr e vim
+abbr e nvim
+abbr vim nvim
 abbr ll ls -al
 abbr Grep grep
+
+function gotest
+    go test -v . | sed ''/PASS/s//(printf "\033[32mPASS\033[0m")/'' | sed ''/FAIL/s//(printf "\033[31mFAIL\033[0m")/''
+end
 
 function kube
     abbr k kubectl
     abbr kcc kubectl config use-context
     abbr kc kubectl create -f 
+    abbr ka kubectl apply -f 
     # chef uses kd as well
     abbr kd kd
     abbr kr kubectl delete -f
@@ -69,7 +83,7 @@ function kube
     end
 
     function ked
-        kubectl edit $argv[1] (kps $argv[2] $argv[3]) -n (kns $argv[2])
+        kubectl edit $argv[1] (kg $argv[1] $argv[2] | grep $argv[3] | selcol 1) -n (kns $argv[2])
     end
 
     function kd
@@ -77,7 +91,7 @@ function kube
     end
 
     function kds
-        kubectl describe $argv[1] -n (kns $argv[2])
+        kubectl describe $argv[1] -n (kns $argv[2]) $argv[3]
     end
 
     function kaps
@@ -128,8 +142,20 @@ function kube
         kubectl get $argv[1] -n (kns $argv[2])
     end
 
+    function kgw
+        kubectl get $argv[1] -o wide -n (kns $argv[2])
+    end
+
+    function kgwe
+        kubectl get $argv[1] --export -o wide -n (kns $argv[2]) $argv[3]
+    end
+
     function kga
         kubectl get $argv[1] --all-namespaces
+    end
+
+    function gen_ingress_auth
+        head --bytes 32 /dev/urandom | base64 | tee $argv[1]-passwd | htpasswd -ic $argv[1]-auth $argv[1]
     end
 end
 
@@ -172,6 +198,11 @@ end
 
 function terminate-instance-from-private-dns
     terminate-ec2-id (ec2-id-from-private-dns $argv[1])
+end
+
+function mkscratch
+    mkdir -p ~/scratch/$argv[1]
+    cd ~/scratch/$argv[1]
 end
 
 chef

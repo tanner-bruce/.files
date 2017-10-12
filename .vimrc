@@ -1,4 +1,3 @@
-set nocompatible
 filetype off
 
 let mapleader = ","
@@ -51,64 +50,75 @@ Plugin 'vim-scripts/indentpython.vim'
 Plugin 'vimwiki/vimwiki'
 Plugin 'wilriker/vim-fish'
 Plugin 'euclio/vim-markdown-composer'
+Plugin 'prabirshrestha/async.vim'
+Plugin 'prabirshrestha/vim-lsp'
 call vundle#end()
+
+function! YamlToJson()
+    silent !clear
+    ruby << EOF
+require 'json'
+require 'yaml'
+
+puts YAML.load_file(Vim::Buffer.current.name).to_json
+EOF
+endfunction
+
+function! JsonToYaml()
+    silent !clear
+    ruby << EOF
+require 'json'
+require 'yaml'
+
+puts JSON.parse(File.read(Vim::Buffer.current.name)).to_yaml
+EOF
+endfunction
+
+function! JsonOnRead()
+    set filetype=yaml
+    JsonToYaml()
+endfunction
+
+function! JsonOnWrite()
+    YamlToJson()
+endfunction
 
 autocmd FileType ruby,eruby if expand('%:p') =~? 'chef' | set filetype=ruby.eruby.chef | endif
 autocmd BufRead if expand('%:p') =~? 'bitesize' | set filetype=yaml | endif
+autocmd BufRead if expand('%:p') =~? '.json' | set filetype=yaml | endif
+autocmd BufWrite if expand('%:p') =~? '.json' | set filetype=yaml | endif
 
 nmap <leader>w :w!<cr>
 filetype plugin indent on
 set encoding=utf-8
 syntax on
-set background=dark
+
 colorscheme vorange
-
-set ttyfast
-set lazyredraw
-set cmdheight=2
-
 let g:airline_powerline_fonts = 1
-set laststatus=2
-set t_Co=256
-
-set nowrap
-
-set showcmd
-set showmode
-
-set relativenumber
-set number
-
-"set list
-set incsearch
-set hlsearch
-
-set wrap
-set linebreak
-
-set undodir=~/.vim/undofiles
-set undofile
-
+set background=dark
+set cmdheight=2
 set colorcolumn=+1
-
-set shiftwidth=4
-set softtabstop=4
-set tabstop=4
 set expandtab
-set autoindent
+set lazyredraw
+set linebreak
+set number
+set relativenumber
+set scrolloff=3
+set shiftwidth=4
+set showmode
+set sidescroll=1
+set sidescrolloff=7
+set softtabstop=4
+set t_Co=256
+set tabstop=4
+set undofile
+set wildmode=list:longest
+set wrap
 
 autocmd FileType ruby,eruby set tabstop=2 softtabstop=2 shiftwidth=2
 autocmd FileType json,yaml set tabstop=2 softtabstop=2 shiftwidth=2
 autocmd FileType go set tabstop=8 softtabstop=8 shiftwidth=8
 
-set wildmode=list:longest
-set wildmenu
-
-set formatoptions-=o
-
-set scrolloff=3
-set sidescrolloff=7
-set sidescroll=1
 
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
@@ -305,7 +315,6 @@ endfunction
 
 set wildignore=*.o,*~,*.pyc
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
-set ruler
 set magic
 
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
