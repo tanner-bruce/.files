@@ -27,6 +27,9 @@ end
 
 abbr run_hal docker run --name halyard --rm -v ~/.hal:/root/.hal gcr.io/spinnaker-marketplace/halyard:stable
 
+# stuff
+abbr lp sudo lsof -Pni tcp
+
 # Arch specific
 abbr pac pacaur
 abbr pss pacaur -Ss
