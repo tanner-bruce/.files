@@ -3,12 +3,14 @@ set -gx GOROOT /go/
 
 set PATH ~/.gem/ruby/2.4.0/bin $PATH
 set PATH ~/bin $PATH
+set PATH ~/bin $PATH
 set -gx PATH $PATH $GOPATH/bin
 set -gx EDITOR nvim
 set -gx VISUAL nvim
 set -gx CCACHE_DIR $HOME/.ccache
 set -gx theme_nerd_fonts yes
 
+set -g theme_display_kubernetes yes
 
 # Java don't like tiling
 set -gx _JAVA_AWT_WM_NONREPARENTING 1
@@ -25,7 +27,17 @@ function sser --description "Starts a SimpleHTTPServer in the current directory"
 end
 
 
+
+# docker
 abbr run_hal docker run --name halyard --rm -v ~/.hal:/root/.hal gcr.io/spinnaker-marketplace/halyard:stable
+abbr dcu docker-compose up
+abbr dcb docker-compose build
+abbr dcud docker-compose up -d
+
+# io
+abbr iotop -bktoqqq .5
+abbr iostat -xdm 5
+
 
 # stuff
 abbr lp sudo lsof -Pni tcp
