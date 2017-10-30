@@ -1,10 +1,8 @@
 set -gx GOPATH ~/go/
-set -gx GOROOT /go/
-
+set -gx GOROOT ~/go_src/
 set PATH ~/.gem/ruby/2.4.0/bin $PATH
 set PATH ~/bin $PATH
-set PATH ~/bin $PATH
-set -gx PATH $PATH $GOPATH/bin
+set -gx PATH $PATH $GOPATH/bin $GOROOT/bin
 set -gx EDITOR nvim
 set -gx VISUAL nvim
 set -gx CCACHE_DIR $HOME/.ccache
@@ -35,8 +33,8 @@ abbr dcb docker-compose build
 abbr dcud docker-compose up -d
 
 # io
-abbr iotop -bktoqqq .5
-abbr iostat -xdm 5
+abbr iot iotop -bktoqqq .5
+abbr ios iostat -xdm 5
 
 
 # stuff
