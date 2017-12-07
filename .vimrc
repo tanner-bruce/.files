@@ -52,6 +52,7 @@ Plugin 'wilriker/vim-fish'
 Plugin 'euclio/vim-markdown-composer'
 Plugin 'prabirshrestha/async.vim'
 Plugin 'prabirshrestha/vim-lsp'
+Plugin 'andrewstuart/vim-kubernetes'
 call vundle#end()
 
 function! YamlToJson()

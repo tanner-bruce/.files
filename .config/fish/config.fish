@@ -1,12 +1,18 @@
+# fish terminal theme
+set -gx theme_nerd_fonts yes
+
+set -gx EDITOR nvim
+set -gx VISUAL nvim
+set -gx LESS '-R'
+set -gx LESSOPEN '|~/.lessfilter %s'
+
 set -gx GOPATH ~/go/
 set -gx GOROOT ~/go_src/
+
 set PATH ~/.gem/ruby/2.4.0/bin $PATH
 set PATH ~/bin $PATH
 set -gx PATH $PATH $GOPATH/bin $GOROOT/bin
-set -gx EDITOR nvim
-set -gx VISUAL nvim
 set -gx CCACHE_DIR $HOME/.ccache
-set -gx theme_nerd_fonts yes
 
 set -g theme_display_kubernetes yes
 
@@ -37,6 +43,7 @@ abbr iot iotop -bktoqqq .5
 abbr ios iostat -xdm 5
 
 
+
 # stuff
 abbr lp sudo lsof -Pni tcp
 
@@ -52,7 +59,8 @@ abbr tn tmux -u new -s
 abbr tl tmux list-sessions
 
 # git
-abbr gc git clone
+abbr gc git commit
+abbr gcl git clone
 abbr gcm git checkout master
 abbr gch git checkout
 abbr gchf git checkout -- 
@@ -167,8 +175,14 @@ function kube
         kubectl get $argv[1] --all-namespaces
     end
 
+    function mkpasswd
+        head --bytes 48 /dev/urandom | base64 | tr -d '=' | tr -d '+' | tr -d '/'
+    end
+
     function gen_ingress_auth
-        head --bytes 32 /dev/urandom | base64 | tee $argv[1]-passwd | htpasswd -ic $argv[1]-auth $argv[1]
+        mkpasswd | tee $argv[1]-passwd | htpasswd -ic auth $argv[2]
+        kubectl create secret -n $argv[3] $argv[1]-passwd --from-file=auth
+        rm auth
     end
 end
 
