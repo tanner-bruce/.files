@@ -25,6 +25,7 @@ function sser --description "Starts a SimpleHTTPServer in the current directory"
 end
 
 
+abbr tf terraform
 
 # docker
 abbr run_hal docker run --name halyard --rm -v ~/.hal:/root/.hal gcr.io/spinnaker-marketplace/halyard:stable
