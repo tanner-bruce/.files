@@ -11,6 +11,12 @@ set shell=/bin/bash
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+Plugin 'google/vim-maktaba'
+Plugin 'bazelbuild/vim-bazel'
+Plugin 'hashivim/vim-terraform'
+Plugin 'hashivim/vim-consul'
+Plugin 'hashivim/vim-vaultproject'
+Plugin 'hashivim/vim-packer'
 Plugin 'ElmCast/elm-vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'Marfisc/vorange'

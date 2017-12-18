@@ -181,8 +181,8 @@ function kube
     end
 
     function gen_ingress_auth
-        mkpasswd | tee $argv[1]-passwd | htpasswd -ic auth $argv[2]
-        kubectl create secret -n $argv[3] $argv[1]-passwd --from-file=auth
+        mkpasswd | tee $argv[1]-passwd | htpasswd -ic auth $argv[1]
+        kubectl create secret generic -n $argv[2] $argv[1]-auth --from-file=auth
         rm auth
     end
 end
