@@ -7,6 +7,7 @@
 	newhighlight = "120 22"
 [core]
 	editor = vim
+	excludesfile = /home/tanner/.gitignore_global
 [diff]
 	tool = kdiff3
 	compactionHeuristic = true
