@@ -86,6 +86,8 @@ function gotest
     go test -v . | sed ''/PASS/s//(printf "\033[32mPASS\033[0m")/'' | sed ''/FAIL/s//(printf "\033[31mFAIL\033[0m")/''
 end
 
+abbr ago ag --go --ignore vendor
+
 function kube
     abbr k kubectl
     abbr kcc kubectl config use-context
@@ -231,6 +233,10 @@ end
 function mkscratch
     mkdir -p ~/scratch/$argv[1]
     cd ~/scratch/$argv[1]
+end
+
+function replace
+    find . -type f | xargs sed -i "s/$argv[1]/$argv[2]/g"
 end
 
 chef
